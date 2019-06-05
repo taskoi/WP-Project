@@ -28,9 +28,9 @@ public class AdService {
         newad.setDescription(adForm.getDescription());
         newad.setPrice(adForm.getPrice());
         newad.setTitle(adForm.getTitle());
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        newad.setDateCreated(now.toString());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String now = dtf.format(LocalDateTime.now());
+        newad.setDateCreated(now);
 
         return adRepository.save(newad);
     }
