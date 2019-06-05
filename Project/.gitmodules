@@ -1,0 +1,6 @@
+[submodule "Project"]
+	path = Project
+	url = https://github.com/taskoi/Project.git
+[submodule "project-react"]
+	path = project-react
+	url = https://github.com/taskoi/project-react.git
