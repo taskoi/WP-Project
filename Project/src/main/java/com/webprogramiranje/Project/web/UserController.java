@@ -1,7 +1,9 @@
 package com.webprogramiranje.Project.web;
 
+import com.webprogramiranje.Project.exceptions.EmailNotValidException;
+import com.webprogramiranje.Project.exceptions.UserMissingParameterException;
 import com.webprogramiranje.Project.model.User;
-import com.webprogramiranje.Project.model.UserForm;
+import com.webprogramiranje.Project.model.RequestBody.UserForm;
 import com.webprogramiranje.Project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping("/saveUser")
-    User saveUser(@RequestBody UserForm userForm){
+    User saveUser(@RequestBody UserForm userForm) throws EmailNotValidException, UserMissingParameterException {
         return userService.saveUser(userForm);
     }
 }

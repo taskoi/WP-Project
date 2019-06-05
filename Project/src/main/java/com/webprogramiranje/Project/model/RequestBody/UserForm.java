@@ -1,4 +1,4 @@
-package com.webprogramiranje.Project.model;
+package com.webprogramiranje.Project.model.RequestBody;
 
 public class UserForm {
 
