@@ -1,11 +1,9 @@
 package com.webprogramiranje.Project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import sun.util.calendar.BaseCalendar;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -25,15 +23,30 @@ public class Ad implements Serializable {
 
     private String dateCreated;
 
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonIgnore
+    private User user;
+
+
     public Ad(){
 
     }
 
-    public Ad(String title, String description, Double price, String dateCreated) {
+    public Ad(String title, String description, Double price, String dateCreated, User user) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.dateCreated = dateCreated;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {

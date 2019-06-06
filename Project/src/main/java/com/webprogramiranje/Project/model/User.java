@@ -7,6 +7,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "userr")
@@ -36,6 +38,9 @@ public class User implements Serializable {
     @Size(min = 8,max = 120)
     private String password;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Ad> adList = new ArrayList<>();
+
     public User(){}
 
     public User(String firstName, String lastName, String username, String password,String email) {
@@ -44,6 +49,14 @@ public class User implements Serializable {
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    public List<Ad> getAdList() {
+        return adList;
+    }
+
+    public void setAdList(List<Ad> adList) {
+        this.adList = adList;
     }
 
     public String getEmail() {
@@ -93,4 +106,5 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

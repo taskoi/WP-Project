@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 public class UserController {
 
     @Autowired
@@ -22,9 +23,14 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @PostMapping("/saveUser")
+    @PostMapping("/createUser")
     @ResponseStatus(HttpStatus.CREATED)
     User saveUser(@RequestBody UserForm userForm) throws EmailNotValidException, UserMissingParameterException {
         return userService.saveUser(userForm);
     }
+
+//    @PatchMapping("/updateUser")
+//    User updateUser(@RequestBody UserUpdate userUpdate){
+//
+//    }
 }

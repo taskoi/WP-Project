@@ -10,16 +10,25 @@ public class AdForm {
 
     private Double price;
 
+    private Long userId;
 
     public AdForm(){
 
     }
 
-    public AdForm(String title, String description, Double price) {
+    public AdForm(String title, String description, Double price,Long userId) {
         this.title = title;
         this.description = description;
         this.price = price;
+        this.userId = userId;
+    }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {

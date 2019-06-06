@@ -4,7 +4,9 @@ import com.webprogramiranje.Project.exceptions.AdMissingParameterException;
 import com.webprogramiranje.Project.exceptions.AdPriceNotDefinedException;
 import com.webprogramiranje.Project.model.Ad;
 import com.webprogramiranje.Project.model.RequestBody.AdForm;
+import com.webprogramiranje.Project.model.User;
 import com.webprogramiranje.Project.peristance.AdRepository;
+import com.webprogramiranje.Project.peristance.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sun.util.calendar.BaseCalendar;
@@ -16,11 +18,16 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdService {
     @Autowired
     private AdRepository adRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
 
     public Ad saveAd(AdForm adForm) throws AdMissingParameterException, AdPriceNotDefinedException {
         Ad newad = new Ad();
@@ -32,6 +39,12 @@ public class AdService {
         String now = dtf.format(LocalDateTime.now());
         newad.setDateCreated(now);
 
+        Optional<User> actual = userRepository.findById(adForm.getUserId());
+        actual.get().getAdList().add(newad);
+
+        newad.setUser(actual.get());
+
+        //userRepository.save(actual.get());
         return adRepository.save(newad);
     }
 
